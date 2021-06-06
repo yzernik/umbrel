@@ -8,16 +8,16 @@ x-logging:
 
 services:
   web:
-    image: yzernik/squeaknode:v0.1.28@sha256:219f6a730f5181f08af6f4612bf29b1151097be583c48b7aeae7fb4b9894e58b
+    image: yzernik/squeaknode:v0.1.42@sha256:90235afeabc8b0a758d69af99df5dfb8854d297f96e1aa5da4f9070f0875d5e7
     logging: *default-logging
     restart: on-failure
     stop_grace_period: 1m
     ports:
-      - 8774:8774
       - 12994:12994
     volumes:
       - ${APP_DATA_DIR}/sqk:/sqk
       - ${LND_DATA_DIR}:/lnd:ro
+    user: "1000:1000"
     environment:
       # Bitcoin Core connection details
       SQUEAKNODE_BITCOIN_RPC_HOST: $BITCOIN_IP
